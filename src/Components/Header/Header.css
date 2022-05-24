@@ -1,0 +1,8 @@
+.Header{
+    margin-top: 3vh;
+    background-color: black;
+    color: white;
+    min-height: 10vh;
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,13 @@
+.content h3{
+    text-align: center;
+    /* background-color: black; */
+    margin-top: 40vh;
+}
+.content button{
+    background-color: blue;
+    color: white;
+    text-align: center;
+    height: 5vh;
+    width: 10vw;
+    margin-left: 40vw;
+}

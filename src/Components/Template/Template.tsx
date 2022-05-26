@@ -1,23 +1,32 @@
 import * as React from 'react';
-import "./template.css"
+import {useState , useEffect} from "react";
+import "./template.css";
+import axios from "axios";
 
-interface IAppProps {
+type props = {
+    allData: any;
 }
 
-const App: React.FunctionComponent<IAppProps> = (props) => {
+const App: React.FunctionComponent<props> = ({allData}) => {
+
+    let [questions , setQuestion]  = useState([] as string[])
+    const getData = async() => {
+        const {data} = await axios.get("./Questions.json")
+        setQuestion(data)
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
+
+    console.log(questions)
   return(
-      <div className='question-component'>
-          <div className='question'>
-              <h3>Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?</h3>
-          </div>
-          <div className='answers'>
-              <p>Richard Branson</p>
-              <p>Alan Sugar</p>
-              <p>Donald Trump</p>
-              <p>Bill Gates</p>
-          </div>
-      </div>
+      <button onClick={() => allData(questions)}>Start Quiz</button>
   ) ;
 };
 
 export default App;
+
+// function initialState<T>(initialState: any, arg1: {}): [any, any] {
+//     throw new Error('Function not implemented.');
+// }

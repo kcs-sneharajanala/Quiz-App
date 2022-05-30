@@ -2,12 +2,13 @@ import * as React from 'react';
 import {useState , useEffect} from "react";
 import "./template.css";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 type props = {
     allData: any;
 }
 
-const App: React.FunctionComponent<props> = ({allData}) => {
+const Template: React.FunctionComponent<props> = ({allData}) => {
 
     let [questions , setQuestion]  = useState([] as string[])
     const getData = async() => {
@@ -33,15 +34,15 @@ const App: React.FunctionComponent<props> = ({allData}) => {
         getData()
     }, [])
 
-    console.log(questions)
     const arrSizeSet = (arr : any) => [...arr].sort(() => 0.5-Math.random()).slice(0,20);
     const newArr = arrSizeSet(questions)
+
   return(
-      <button onClick={() => allData(newArr)}>Start Quiz</button>
+      <Link to = "/QuestionCard"><button className = "btn-1" onClick={() => allData(newArr)}>Start Quiz</button></Link>
   ) ;
 };
 
-export default App;
+export default Template;
 
 // function initialState<T>(initialState: any, arg1: {}): [any, any] {
 //     throw new Error('Function not implemented.');

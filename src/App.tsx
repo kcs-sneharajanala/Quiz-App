@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Header from "./Components/Header/Header"
-import Home from "./Components/Home/Home";
 import QuestionCard from './Components/QuestionCard/QuestionCard';
 import ResultPage from './Components/Result/ResultPage';
 import Template from "./Components/Template/Template";
@@ -13,15 +12,22 @@ function App() {
   const storeFunction = (props:any) => {
     setStoreData(props)
   }
-  console.log(storeData, "sssss")
   
+  console.log(storeData, "storedata")
 
   return (
     <div className="App">
-      <Header/>
+      <BrowserRouter>
+      <Routes>
+        <Route path = "/QuestionCard" element = {<QuestionCard questionsIn = {storeData}/>}/>
+        <Route path = "/" element = {<Template allData = {storeFunction}/>}/>
+        <Route path = "/ResultPage" element = {<ResultPage getData= {storeData}/>}/>
+      </Routes>
+      </BrowserRouter>
+      {/* <Header/> */}
       {/* <Home/> */}
-      <QuestionCard questionsIn = {storeData}/>
-      <Template allData = {storeFunction}/>
+      {/* <QuestionCard questionsIn = {storeData}/> */}
+      {/* <Template allData = {storeFunction}/> */}
       {/* <ResultPage/> */}
     </div>
   );

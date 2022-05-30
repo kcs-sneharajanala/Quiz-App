@@ -1,7 +1,7 @@
 import  React,{useState} from 'react';
 import Answer from '../Answer/Answer';
-import ResultPage from '../Result/ResultPage';
-import Timer from '../Timer/Timer';
+import {Navigate} from "react-router-dom";
+import Template from '../Template/Template';
 
 type props = {
     questionsIn : string[];
@@ -10,19 +10,31 @@ type props = {
 const QuestionCard: React.FunctionComponent<props> = ({questionsIn}) => {
 
     const[indexQues, setIndexQues] = useState<number>(1)
+    const [counter, setCounter] = useState<number>(6);
 
     const indexChange = () => {
         setIndexQues(indexQues+1)
+        setCounter(5)
     }
 
-    const quesInfo = () =>{
+    React.useEffect(() => {
+        const timer =
+        setInterval(() => setCounter(counter - 1), 1000);
+        return () => clearInterval(timer);
+      }, [counter]);
+    
+      if(counter < 0){
+          setCounter(5)
+          indexChange()
+      }
+
+      const quesInfo = () =>{ if(indexQues <= 20){
         return (
         <div>
+            <p>Countdown : {counter}</p>
           {questionsIn && questionsIn.map((data : any, index:number) => {
               return(
                 <>
-                {console.log(data.question, indexQues)}
-                <Timer/>
                 {index+1 === indexQues &&
                 <div>
                 <div className="Question-1" key={data.id}>
@@ -32,7 +44,7 @@ const QuestionCard: React.FunctionComponent<props> = ({questionsIn}) => {
                     {data.answers.map((res : any) => {
                         return(
                             <div>
-                                <Answer getAnswers = {res} getIndex = {indexQues} sendIndex = {indexChange}/>
+                                <Answer getAnswers = {res} getIndex = {indexQues} sendIndex = {indexChange} correctAns={data.correct_answer}/>
                             </div>
                         )
                     })}           
@@ -40,19 +52,19 @@ const QuestionCard: React.FunctionComponent<props> = ({questionsIn}) => {
                 </div>}
                 </>
               )
-              
-
           })}
           
       </div>
-        )
+        )}
+    }
+
+    if(indexQues >= 21){
+        return  <Navigate to = "/ResultPage"/>
     }
 
     return(
       <>
           {quesInfo()}
-          <button onClick = {indexChange}>Next</button>
-          <ResultPage endIndex = {indexQues}/>
       </>
   ) 
 };

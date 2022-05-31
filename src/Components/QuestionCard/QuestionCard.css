@@ -1,0 +1,24 @@
+
+
+.card{
+    display: block;
+    border: 1px solid black;
+    width: 50%;
+    margin-left: 350px;
+    margin-top: 200px;
+}
+
+.card p{
+    color:green;
+    font-size: 25px;
+    display: block;
+    font-weight: 700;
+    background-color: black;
+    text-align: center;
+}
+.Question-1{
+    display: block;
+}
+.Question-1 h2{
+    font-size: 30px;
+}

@@ -1,0 +1,18 @@
+.answers {
+    padding-left: 10px;
+}
+
+.answers button{
+    padding: 5px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+
+}
+
+.answers button:hover{
+    background-color: rgb(95, 160, 100);
+    color: blac;
+}
